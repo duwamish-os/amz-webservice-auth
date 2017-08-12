@@ -9,10 +9,14 @@
 
 (deftest post-request
   (testing "sending a request"
-    (is (= (:body (http/post "https://jsonplaceholder.typicode.com/posts"
-     {:body "{\"name\": \"updprayag\"}"
-      :headers {"X-Api-Version" "2"}
-      :content-type :json
-      :socket-timeout 1000  ;; in milliseconds
-      :conn-timeout 1000    ;; in milliseconds
-      :accept :json})) "{\n  \"name\": \"updprayag\",\n  \"id\": 101\n}"))))
+    (let [response (http/post "https://jsonplaceholder.typicode.com/posts"                              
+     {:body "{\"name\": \"updprayag\"}"                                                                
+      :headers {"X-Api-Version" "2"}                                                                   
+      :content-type :json                                                                              
+      :socket-timeout 1000  ;; in milliseconds                                                         
+      :conn-timeout 1000    ;; in milliseconds                                                         
+      :accept :json})]
+    (println (str "[INFO] http response " response ))
+    (is (= (:status response) 201))
+    (is (= (:body response) "{\n  \"name\": \"updprayag\",\n  \"id\": 101\n}"))
+)))
