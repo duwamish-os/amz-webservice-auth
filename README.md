@@ -1,4 +1,4 @@
-# aws-creds
+# amz-auth
 
 FIXME: description
 

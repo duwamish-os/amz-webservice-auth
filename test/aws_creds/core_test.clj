@@ -1,7 +1,18 @@
 (ns aws-creds.core-test
   (:require [clojure.test :refer :all]
-            [aws-creds.core :refer :all]))
+            [aws-creds.core :refer :all]
+            [clj-http.client :as http]))
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+(deftest hits-the-endpoint
+  (testing "hits the endpoint"
+    (is (= 1 1))))
+
+(deftest post-request
+  (testing "sending a request"
+    (is (= (:body (http/post "https://jsonplaceholder.typicode.com/posts"
+     {:body "{\"name\": \"updprayag\"}"
+      :headers {"X-Api-Version" "2"}
+      :content-type :json
+      :socket-timeout 1000  ;; in milliseconds
+      :conn-timeout 1000    ;; in milliseconds
+      :accept :json})) "{\n  \"name\": \"updprayag\",\n  \"id\": 101\n}"))))
