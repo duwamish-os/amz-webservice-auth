@@ -3,8 +3,13 @@
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
+
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [clj-http "3.6.1"]]
+                 [com.specs/specs-lib "1.0"]
+                 [com.IBM.AS400/DB2DriverAS400 "1.0.0"]
+                 [clj-http "3.6.1"]
+                 [commons-dbcp/commons-dbcp "1.2.2"]]
+
   :main ^:skip-aot aws-creds.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})
