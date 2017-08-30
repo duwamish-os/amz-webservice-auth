@@ -18,5 +18,22 @@
       :accept :json})]
     (println (str "[INFO] http response " response ))
     (is (= (:status response) 201))
-    (is (= (:body response) "{\n  \"name\": \"updprayag\",\n  \"id\": 101\n}"))
-)))
+    (is (= (:body response) "{\n  \"name\": \"updprayag\",\n  \"id\": 101\n}")))))
+
+;; https://clojure.org/guides/threading_macros
+
+(defn transform-customer [customer]
+  (update (assoc customer :item-color :gray) :age inc))
+
+;; the arrow macro expands at compile time into the original code
+(defn transform [customer]
+  (-> customer
+      (assoc :sku-color :blue)
+      (update :age inc)))
+
+(deftest updates-color
+  (testing "adds item-color, updates age"
+
+    (is (= (transform-customer {:name "prayagupd", :age 28}) {:name "prayagupd" :age 29 :item-color :gray}))
+
+    (is (= (transform {:name "emant", :age 24}) {:name "emant" :age 25 :sku-color :blue}))))
