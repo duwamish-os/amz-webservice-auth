@@ -1,6 +1,6 @@
-# amz-auth
+# http-flow-specs
 
-FIXME: description
+clojure specs for e2e specs
 
 ## Installation
 
